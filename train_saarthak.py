@@ -1,11 +1,10 @@
 import pandas as pd
 import numpy as np
 from sklearn.impute import SimpleImputer
+def preprocess_saarthak(df):
 si_mostfrequent=SimpleImputer(strategy='most_frequent')
-df_train[['FoodCourt']]=si_mostfrequent.fit_transform(df_train[['FoodCourt']])
-df_train[['RoomService']] = si_mostfrequent.fit_transform(df_train[['RoomService']])
-df_train[['FoodCourt']] = si_mostfrequent.fit_transform(df_train[['FoodCourt']])
-df_train[['CryoSleep']]=si_mostfrequent.fit_transform(df_train[['CryoSleep']])
-si_missing=SimpleImputer(strategy='constant',fill_value='Missing')
-df_train[['Name']]=si_missing.fit_transform(df_train[['Name']])
-
+    df[['FoodCourt']] = si_mostfrequent.fit_transform(df[['FoodCourt']])
+    df[['RoomService']] = si_mostfrequent.fit_transform(df[['RoomService']])
+    df[['CryoSleep']] = si_mostfrequent.fit_transform(df[['CryoSleep']])
+    df['Name'] = df['Name'].fillna("Missing")
+return df

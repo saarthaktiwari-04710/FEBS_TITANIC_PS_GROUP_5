@@ -6,3 +6,6 @@ df = pd.read_csv("train.csv")
 
 df = preprocess_TC(df)
 df = preprocess_saarthak(df)
+
+spending_cols = ['RoomService', 'FoodCourt', 'ShoppingMall', 'Spa', 'VRDeck']
+df['TotalSpending'] = df[spending_cols].sum(axis=1)

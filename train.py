@@ -24,3 +24,18 @@ df['Side'] = df.groupby('GroupId')['Side'].transform(lambda x: x.fillna(x.mode()
 side_mode = df['Side'].mode()[0]
 df['Side'] = df['Side'].fillna(side_mode)
 df['GroupSize'] = df.groupby('GroupId')['PassengerId'].transform('count')
+
+#Transported Count Plot
+import matplotlib.pyplot as plt
+
+plt.figure(figsize=(6, 4))
+df['Transported'].value_counts().plot(kind='bar')
+
+plt.xlabel("Transported")
+plt.ylabel("Count")
+plt.title("Transported Count Plot")
+plt.tight_layout()
+plt.xticks(rotation=0)
+plt.show()
+
+

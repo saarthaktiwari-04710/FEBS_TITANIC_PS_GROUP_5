@@ -12,7 +12,6 @@ si_missing=SimpleImputer(strategy='constant',fill_value='Missing')
 df_train[['Name']]=si_missing.fit_transform(df_train[['Name']])
 si=SimpleImputer(strategy='most_frequent')
 df_train[['CryoSleep']]=si.fit_transform(df_train[['CryoSleep']])
-df_train['CryoSleep']=df_train['CryoSleep'].astype(int)
 df_train[['Deck','Cabin_Num','Side']]=df_train['Cabin'].str.split('/',expand=True)
 df_train['Group']=df_train['PassengerId'].str.split('_').str[0]
 df_train['Cabin_Num'] = pd.to_numeric(df_train['Cabin_Num'], errors='coerce')
@@ -24,3 +23,4 @@ df_train['Cabin_Num'] = df_train['Cabin_Num'].fillna(cabin_median)
 df_train['Side'] = df_train.groupby('Group')['Side'].transform(lambda x: x.fillna(x.mode()[0] if len(x.mode()) else x))
 side_mode = df_train['Side'].mode()[0]
 df_train['Side'] = df_train['Side'].fillna(side_mode)
+

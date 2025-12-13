@@ -38,4 +38,16 @@ plt.tight_layout()
 plt.xticks(rotation=0)
 plt.show()
 
+#Age distribution graph
+
+
+from scipy.stats import gaussian_kde
+plt.figure(figsize=(8, 6))
+plt.hist(age, bins=40, density=True)
+kde = gaussian_kde(age)
+plt.xlabel("Age")
+plt.ylabel("Density")
+plt.title("Age Distribution")
+plt.tight_layout()
+plt.show()
 

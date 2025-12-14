@@ -97,6 +97,17 @@ plt.title("Deck vs Transported")
 plt.tight_layout()
 plt.show()
 
+# Side vs Transported
+plt.figure(figsize=(5, 4))
+side_counts = pd.crosstab(df['Side'], df['Transported'])
+side_counts.plot(kind='bar')
+plt.xlabel("Side")
+plt.ylabel("Count")
+plt.title("Side vs Transported")
+plt.tight_layout()
+plt.show()
+
+
 
 
 

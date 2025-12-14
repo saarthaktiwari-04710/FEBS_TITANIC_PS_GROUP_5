@@ -49,6 +49,23 @@ plt.title("Age Distribution")
 plt.tight_layout()
 plt.show()
 
+# Age vs Transported
+plt.figure(figsize=(8, 6))
+plt.hist(df[df['Transported'] == True]['Age'],
+         bins=40,
+         alpha=0.6,
+         label='Transported')
+plt.hist(df[df['Transported'] == False]['Age'],
+         bins=40,
+         alpha=0.6,
+         label='Not Transported')
+plt.xlabel("Age")
+plt.ylabel("Count")
+plt.title("Age Distribution by Transported")
+plt.legend()
+plt.tight_layout()
+plt.show()
+
 # HomePlanet vs Transported
 plt.figure(figsize=(6, 4))
 homeplanet_counts = pd.crosstab(df['HomePlanet'], df['Transported'])

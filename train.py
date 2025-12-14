@@ -107,6 +107,17 @@ plt.title("Side vs Transported")
 plt.tight_layout()
 plt.show()
 
+#Boxplot of transported vs total spending
+
+spend_false = df[df["Transported"] == False]["TotalSpending"]
+spend_true = df[df["Transported"] == True]["TotalSpending"]
+plt.figure(figsize=(6, 4))
+plt.boxplot([spend_false, spend_true], labels=["Not Transported", "Transported"])
+plt.xlabel("Transported")
+plt.ylabel("Total Spending")
+plt.title("Total Spending vs Transported")
+
+plt.show()
 
 
 

@@ -1,8 +1,8 @@
 import pandas as pd
 import numpy as np
 from sklearn.impute import SimpleImputer
-si_RS=SimpleImputer(strategy='most_frequent')
-si_FC=SimpleImputer(strategy='most_frequent')
+si_RS = SimpleImputer(strategy='constant', fill_value=0)
+si_FC = SimpleImputer(strategy='constant', fill_value=0)
 si_CS=SimpleImputer(strategy='most_frequent')
 si_Name=SimpleImputer(strategy='constant',fill_value='Missing')
 def preprocess_saarthak(df):

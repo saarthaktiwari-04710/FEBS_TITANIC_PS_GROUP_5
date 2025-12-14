@@ -74,7 +74,6 @@ homeplanet_counts.plot(kind='bar')
 plt.xlabel("HomePlanet")
 plt.ylabel("Count")
 plt.title("HomePlanet vs Transported")
-plt.xticks(rotation=0)
 plt.tight_layout()
 plt.show()
 
@@ -85,9 +84,19 @@ destination_counts.plot(kind='bar')
 plt.xlabel("Destination")
 plt.ylabel("Count")
 plt.title("Destination vs Transported")
-plt.xticks(rotation=0)
 plt.tight_layout()
 plt.show()
+
+# Deck vs Transported
+plt.figure(figsize=(6, 4))
+deck_counts = pd.crosstab(df['Deck'], df['Transported'])
+deck_counts.plot(kind='bar')
+plt.xlabel("Deck")
+plt.ylabel("Count")
+plt.title("Deck vs Transported")
+plt.tight_layout()
+plt.show()
+
 
 
 

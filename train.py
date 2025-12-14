@@ -40,6 +40,7 @@ plt.show()
 
 #Age distribution graph
 from scipy.stats import gaussian_kde
+age = df['Age'].dropna()
 plt.figure(figsize=(8, 6))
 plt.hist(age, bins=40, density=True)
 kde = gaussian_kde(age)

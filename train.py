@@ -39,8 +39,6 @@ plt.xticks(rotation=0)
 plt.show()
 
 #Age distribution graph
-
-
 from scipy.stats import gaussian_kde
 plt.figure(figsize=(8, 6))
 plt.hist(age, bins=40, density=True)
@@ -50,4 +48,16 @@ plt.ylabel("Density")
 plt.title("Age Distribution")
 plt.tight_layout()
 plt.show()
+
+# HomePlanet vs Transported
+plt.figure(figsize=(6, 4))
+homeplanet_counts = pd.crosstab(df['HomePlanet'], df['Transported'])
+homeplanet_counts.plot(kind='bar')
+plt.xlabel("HomePlanet")
+plt.ylabel("Count")
+plt.title("HomePlanet vs Transported")
+plt.xticks(rotation=0)
+plt.tight_layout()
+plt.show()
+
 

@@ -78,4 +78,16 @@ plt.xticks(rotation=0)
 plt.tight_layout()
 plt.show()
 
+# Destination vs Transported
+plt.figure(figsize=(6, 4))
+destination_counts = pd.crosstab(df['Destination'], df['Transported'])
+destination_counts.plot(kind='bar')
+plt.xlabel("Destination")
+plt.ylabel("Count")
+plt.title("Destination vs Transported")
+plt.xticks(rotation=0)
+plt.tight_layout()
+plt.show()
+
+
 

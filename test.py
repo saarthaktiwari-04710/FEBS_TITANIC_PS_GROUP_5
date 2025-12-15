@@ -2,8 +2,12 @@ import pandas as pd
 import numpy as np
 import pickle
 import preprocessing_saarthak
-
+from preprocessing_TC import preprocess_TC
+import train
 df = pd.read_csv("test.csv")
+
+df = preprocess_TC(df)
+
 
 df[['RoomService']]=si_RS.transform(df[['RoomService']])
 df[['FoodCourt']]=si_FC.transform(df[['FoodCourt']])
@@ -27,3 +31,29 @@ df['GroupSize'] = df.groupby('GroupId')['PassengerId'].transform('count')
 
 spending_cols = ['RoomService', 'FoodCourt', 'ShoppingMall', 'Spa', 'VRDeck']
 df['TotalSpending'] = df[spending_cols].sum(axis=1)
+
+# Dropping columns that are not useful 
+df = df.drop(columns=['PassengerId','Name', 'Cabin'])
+
+categorical_cols = ['HomePlanet', 'Destination','Deck', 'Side','VIP', 'CryoSleep']
+# One-Hot Encoding
+df = pd.get_dummies( df, columns=categorical_cols,  drop_first=True)
+
+
+X=df
+X[['Age', 'TotalSpending']] = scaler.transform(X[['Age', 'TotalSpending']])
+X=X.values.astype(float)
+
+#loading values of w and b from train.py
+with open('model_artifacts.pkl', 'rb') as f:
+        artifacts = pickle.load(f)
+    
+w = artifacts['w']
+b = artifacts['b']
+
+#predicting transported
+predictions=predict(X, w, b)
+
+#saving values in submission.csv
+submission = pd.DataFrame({'PassengerId': passenger_ids, 'Transported': predictions})
+submission.to_csv('submission.csv', index=False)

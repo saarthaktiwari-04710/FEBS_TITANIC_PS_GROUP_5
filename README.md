@@ -40,28 +40,29 @@ II. `test.py`
 I. train.py
 1. Handled missing values in columns:
 
- -Homeplanet
+   -Homeplanet
  
- -Destination
+   -Destination
  
- -VIP
+   -VIP
  
- -Shopping Mall
+   -Shopping Mall
  
- -Age
+   -Age
  
- -VRDeck
+   -VRDeck
  
 
-  *For spending-related columns, missing values were replaced with 0 because a missing entry likely indicates no spending.
+   *For spending-related columns, missing values were replaced with 0 because a missing entry likely indicates no spending.
   
-  *Missing Age values were filled using the median.
+   *Missing Age values were filled using the median.
   
-  *Missing values for VIP were filled with False.
+   *Missing values for VIP were filled with False.
   
-  *Missing values in HomePlanet and Destination were filled using the mode since these are categorical variables.
+   *Missing values in HomePlanet and Destination were filled using the mode since these are categorical variables.
 
-  Created a variable for Total Spending and summed up all the spendings into that, to make the analysis easy.
+    Created a variable for Total Spending and summed up all the spendings into that, to make the analysis easy.
+  
 
   2. Plotted graphs of:
 

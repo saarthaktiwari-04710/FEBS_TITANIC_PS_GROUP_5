@@ -37,52 +37,54 @@ II. `test.py`
         
 **Thanvi Chennupati:-**
 
-I. `train.py`
-   1.Handled missing values in columns:
-     -Homeplanet
-     -Destination
-     -VIP
-     -Shopping Mall
-     -Age
-     -VRDeck
-     
-   For spending-related columns, missing values were replaced with 0 because a missing entry likely indicates no spending.
-   Missing Age values were filled using the median.
-   Missing values for VIP filled false.
-   Missing values in HomePlanet and Destination were filled using the mode since these are categorical variables.
+I. train.py
+1. Handled missing values in columns:
 
-   Created a variable for Total Spending and sum up all the spendings into that , to make the analysis easy.
+ -Homeplanet
+ -Destination
+ -VIP
+ -Shopping Mall
+ -Age
+ -VRDeck
+
+  For spending-related columns, missing values were replaced with 0 because a missing entry likely indicates no spending.
+  Missing Age values were filled using the median.
+  Missing values for VIP were filled with False.
+  Missing values in HomePlanet and Destination were filled using the mode since these are categorical variables.
+
+  Created a variable for Total Spending and summed up all the spendings into that, to make the analysis easy.
 
   2. Plotted graphs of:
-     -Homeplanet vs transported
-     -Destination vs transported
-     -Age vs transported
-     -Side vs transported
-     -Deck vs transported
 
-  3.Dropped the columns that are not useful for the training of the model.
-  
-  4.Did the encoding for Homeplanet, Destination , side , deck , VIP and cryosleep using one hot encoder.
+   -Homeplanet vs Transported
+   -Destination vs Transported
+   -Age vs Transported
+   -Side vs Transported
+   -Deck vs Transported
 
-  5.Changed the values of Transported from T/F to 1/0.
+   3. Dropped the columns that are not useful for the training of the model.
+      
+   4. Did the encoding for Homeplanet,Destination,Side,Deck,VIP,Cryosleep using one-hot encoding.
 
-  6.Did target splitting for the model , x as features and y as transported or not.
+   5. Changed the values of Transported from T/F to 1/0.
+      
+   6. Did target splitting for the model:
+     X as features
+     y as transported or not
+    
+   7. The numerical features Age and TotalSpending were scaled using StandardScaler.
 
-  7.The numerical features Age and TotalSpending were scaled using StandardScaler.
+II. test.py
+ 1. Again used the old file to fill missing values in columns:
+    Homeplanet
+    Destination
+    VIP
+    Shopping Mall
+    Age
+    VRDeck
 
-II. `test.py`
+2. Repeated all the steps like dropping few unimportant columns and creating new ones for total spending and did encoding for above mentioned columns again using one-hot encoder.
 
-   1.Again used the old file to fill missing values in columns:
-     -Homeplanet
-     -Destination
-     -VIP
-     -Shopping Mall
-     -Age
-     -VRDeck
-     
-   2.Repeated all the steps like dropping few unimportant columns and creating new ones for total spending and did encoding for above mentioned columns again using one-hot encoder
+Uploaded all the required data into the repo (train.csv, test.csv, submission.csv) and checked all the code for errors and corrected if any.
 
-   
-   Uploaded all the required data into the repo (train.csv,test.csv,submission.csv) and checked all the code for errors and corrected if any.
-   
 

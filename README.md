@@ -41,26 +41,37 @@ I. train.py
 1. Handled missing values in columns:
 
  -Homeplanet
+ 
  -Destination
+ 
  -VIP
+ 
  -Shopping Mall
+ 
  -Age
+ 
  -VRDeck
+ 
 
-  For spending-related columns, missing values were replaced with 0 because a missing entry likely indicates no spending.
-  Missing Age values were filled using the median.
-  Missing values for VIP were filled with False.
-  Missing values in HomePlanet and Destination were filled using the mode since these are categorical variables.
+  *For spending-related columns, missing values were replaced with 0 because a missing entry likely indicates no spending.
+  *Missing Age values were filled using the median.
+  *Missing values for VIP were filled with False.
+  *Missing values in HomePlanet and Destination were filled using the mode since these are categorical variables.
 
   Created a variable for Total Spending and summed up all the spendings into that, to make the analysis easy.
 
   2. Plotted graphs of:
 
    -Homeplanet vs Transported
+   
    -Destination vs Transported
+   
    -Age vs Transported
+   
    -Side vs Transported
+   
    -Deck vs Transported
+   
 
    3. Dropped the columns that are not useful for the training of the model.
       
@@ -77,13 +88,18 @@ I. train.py
 II. test.py
  1. Again used the old file to fill missing values in columns:
     Homeplanet
+    
     Destination
+    
     VIP
+    
     Shopping Mall
+    
     Age
+    
     VRDeck
 
-2. Repeated all the steps like dropping few unimportant columns and creating new ones for total spending and did encoding for above mentioned columns again using one-hot encoder.
+3. Repeated all the steps like dropping few unimportant columns and creating new ones for total spending and did encoding for above mentioned columns again using one-hot encoder.
 
 Uploaded all the required data into the repo (train.csv, test.csv, submission.csv) and checked all the code for errors and corrected if any.
 

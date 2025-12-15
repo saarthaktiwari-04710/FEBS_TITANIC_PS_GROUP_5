@@ -93,6 +93,7 @@ I. `train.py`
 II.`test.py`
 
  1. Again used the old file to fill missing values in columns:
+    
     Homeplanet
     
     Destination
@@ -105,7 +106,7 @@ II.`test.py`
     
     VRDeck
 
-3. Repeated all the steps like dropping few unimportant columns and creating new ones for total spending and did encoding for above mentioned columns again using one-hot encoder.
+2. Repeated all the steps like dropping few unimportant columns and creating new ones for total spending and did encoding for above mentioned columns again using one-hot encoder.
 
 Uploaded all the required data into the repo (train.csv, test.csv, submission.csv) and checked all the code for errors and corrected if any.
 

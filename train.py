@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 from preprocessing_TC import preprocess
-from preprocessing_saarthak import preprocessing_saarthak
+import preprocessing_saarthak
 import random
 df = pd.read_csv("train.csv")
 
@@ -137,7 +137,7 @@ plt.tight_layout()
 plt.show()
 
 # Dropping columns that are not useful
-df = df.drop(columns=['PassengerId','Name', 'Cabin'])
+df = df.drop(columns=['PassengerId','Name', 'Cabin','RoomService', 'FoodCourt', 'ShoppingMall', 'Spa', 'VRDeck'])
 
 categorical_cols = ['HomePlanet', 'Destination','Deck', 'Side','VIP', 'CryoSleep']
 # One-Hot Encoding
@@ -186,5 +186,5 @@ with open('model_artifacts.pkl', 'wb') as f: pickle.dump(artifacts, f)
 #Predicting
 def predict(X, w, b):
     probs = sigmoid(np.dot(X, w) + b)
-    return (probs >= 0.5)
+    return (probs > 0.5)
 

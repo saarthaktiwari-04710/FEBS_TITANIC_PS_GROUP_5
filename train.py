@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 from preprocessing_TC import preprocess
-import preprocessing_saarthak
+from preprocessing_saarthak import preprocessing_saarthak
 import random
 df = pd.read_csv("train.csv")
 

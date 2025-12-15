@@ -154,4 +154,39 @@ from sklearn.preprocessing import StandardScaler
 scaler = StandardScaler()
 X[['Age', 'TotalSpending']] = scaler.fit_transform(X[['Age', 'TotalSpending']])
 
+#Training Logistic Regression model
+def sigmoid(z):
+         z = np.clip(z, -500, 500) 
+         a = 1/(1+np.exp(-z))
+         return a
+
+#defining parameters
+w=np.ones(X.shape[1])
+b=0
+epochs=100000
+learning_rate=0.01
+
+#Traing by iterations
+for i in range(epochs):
+  s=random.randint(0,X.shape[0]-1)
+  y0=np.dot(X[s],w)+b
+  y_hat=sigmoid(y0)
+  error=y[s]-y_hat
+  w=w+learning_rate*error*X[s]
+  b=b+learning_rate*error
+
+#saving it to a binary file
+import pickle
+artifacts = {
+        'w': w,
+        'b': b,
+        'columns': df.drop(columns=['Transported']).columns.tolist()
+}
+with open('model_artifacts.pkl', 'wb') as f:
+        pickle.dump(artifacts, f)
+
+#Predicting 
+def predict(X, w, b):
+    probs = sigmoid(np.dot(X, w) + b)
+    return (probs >= 0.5)
 

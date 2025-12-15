@@ -2,12 +2,12 @@ import pandas as pd
 import numpy as np
 import pickle
 
-import preprocessing_saarthak import preprocess_saarthak
+import preprocessing_saarthak 
 from preprocessing_TC import preprocess
 df = pd.read_csv("test.csv")
 
 df = preprocess(df)
-df = preprocess_saarthak(df)
+df = preprocessing_saarthak.preprocess_saarthak(df)
 
 df[['Deck','CabinNum','Side']]=df['Cabin'].str.split('/',expand=True)
 df['GroupId']=df['PassengerId'].str.split('_').str[0]
@@ -33,15 +33,14 @@ categorical_cols = ['HomePlanet', 'Destination','Deck', 'Side','VIP', 'CryoSleep
 # One-Hot Encoding
 df = pd.get_dummies( df, columns=categorical_cols,  drop_first=True)
 
-df['Transported'] = df['Transported'].astype(int)
 
-X = df.drop('Transported', axis=1)
+X = df
 
 #loading values of w and b from train.py
 with open('model_artifacts.pkl', 'rb') as f:artifacts = pickle.load(f)    
-     w = artifacts['w']
-     b = artifacts['b']
-     scaler = artifacts['scaler']
+w = artifacts['w']
+b = artifacts['b']
+scaler = artifacts['scaler']
 
 # Scaling
 X[['Age', 'TotalSpending']] = scaler.transform(X[['Age', 'TotalSpending']])

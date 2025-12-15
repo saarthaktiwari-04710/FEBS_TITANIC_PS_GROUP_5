@@ -11,5 +11,5 @@ def preprocess_saarthak(df):
     df[['RoomService']] = si_RS.fit_transform(df[['RoomService']])
     df[['CryoSleep']] = si_CS.fit_transform(df[['CryoSleep']])
     df[['Name']]=si_Name.fit_transform(df[['Name']])
-    df[['Spa']]=si_SPA.fit_transform(df[['Spa']]
+    df[['Spa']]=si_SPA.fit_transform(df[['Spa']])
 return df

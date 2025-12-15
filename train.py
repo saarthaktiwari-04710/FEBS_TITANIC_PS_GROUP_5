@@ -155,8 +155,12 @@ y = df['Transported']
 from sklearn.preprocessing import StandardScaler
 scaler = StandardScaler()
 X[['Age', 'TotalSpending']] = scaler.fit_transform(X[['Age', 'TotalSpending']])
+
+
 x1=X.values.astype(float)
 y1=y.values.astype(float)
+
+
 #Training Logistic Regression model
 def sigmoid(z):
          z = np.clip(z, -500, 500)
@@ -164,9 +168,9 @@ def sigmoid(z):
          return a
 
 #defining parameters
-w=np.ones(X.shape[1])*0.01 # Actually if I make it array of only ones it could really make it worse
+w=np.ones(X.shape[1])
 b=0
-epochs=100000
+epochs=30000
 learning_rate=0.01
 
 #Traing by iterations

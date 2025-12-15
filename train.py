@@ -1,11 +1,12 @@
 import pandas as pd
 import numpy as np
-from preprocessing_TC import preprocess_TC
+from preprocessing_TC import preprocess
 import preprocessing_saarthak
+import random
 df = pd.read_csv("train.csv")
 
-df = preprocess_TC(df)
-df = preprocess_saarthak(df)
+df = preprocess(df)
+df = preprocessing_saarthak.preprocess_saarthak(df)
 
 spending_cols = ['RoomService', 'FoodCourt', 'ShoppingMall', 'Spa', 'VRDeck']
 df['TotalSpending'] = df[spending_cols].sum(axis=1)
@@ -15,12 +16,12 @@ df['TotalSpending'] = df[spending_cols].sum(axis=1)
 df[['Deck','CabinNum','Side']]=df['Cabin'].str.split('/',expand=True)
 df['GroupId']=df['PassengerId'].str.split('_').str[0]
 df['CabinNum'] = pd.to_numeric(df['CabinNum'], errors='coerce')
-df['Deck'] = df.groupby('GroupId')['Deck'].transform(lambda x: x.fillna(x.mode()[0]) if not x.mode().empty else x))
+df['Deck'] = df.groupby('GroupId')['Deck'].transform(lambda x: x.fillna(x.mode()[0]) if not x.mode().empty else x)
 deck_mode = df['Deck'].mode()[0]
 df['Deck'] = df['Deck'].fillna(deck_mode)
 cabin_median = df['CabinNum'].median()
 df['CabinNum'] = df['CabinNum'].fillna(cabin_median)
-df['Side'] = df.groupby('GroupId')['Side'].transform(lambda x: x.fillna(x.mode()[0]) if not x.mode().empty else x))
+df['Side'] = df.groupby('GroupId')['Side'].transform(lambda x: x.fillna(x.mode()[0]) if not x.mode().empty else x)
 side_mode = df['Side'].mode()[0]
 df['Side'] = df['Side'].fillna(side_mode)
 df['GroupSize'] = df.groupby('GroupId')['PassengerId'].transform('count')
@@ -135,7 +136,7 @@ plt.title("CryoSleep vs Transported")
 plt.tight_layout()
 plt.show()
 
-# Dropping columns that are not useful 
+# Dropping columns that are not useful
 df = df.drop(columns=['PassengerId','Name', 'Cabin'])
 
 categorical_cols = ['HomePlanet', 'Destination','Deck', 'Side','VIP', 'CryoSleep']
@@ -153,10 +154,11 @@ y = df['Transported']
 from sklearn.preprocessing import StandardScaler
 scaler = StandardScaler()
 X[['Age', 'TotalSpending']] = scaler.fit_transform(X[['Age', 'TotalSpending']])
-
+x1=X.values.astype(float)
+y1=y.values.astype(float)
 #Training Logistic Regression model
 def sigmoid(z):
-         z = np.clip(z, -500, 500) 
+         z = np.clip(z, -500, 500)
          a = 1/(1+np.exp(-z))
          return a
 
@@ -168,11 +170,11 @@ learning_rate=0.01
 
 #Traing by iterations
 for i in range(epochs):
-  s=random.randint(0,X.shape[0]-1)
-  y0=np.dot(X[s],w)+b
+  s=random.randint(0,x1.shape[0]-1)
+  y0=np.dot(x1[s],w)+b
   y_hat=sigmoid(y0)
-  error=y[s]-y_hat
-  w=w+learning_rate*error*X[s]
+  error=y1[s]-y_hat
+  w=w+learning_rate*error*x1[s]
   b=b+learning_rate*error
 
 #saving it to a binary file
@@ -181,7 +183,7 @@ artifacts = { 'w': w, 'b': b, 'columns': X.columns.tolist(),'scaler': scaler}
 
 with open('model_artifacts.pkl', 'wb') as f: pickle.dump(artifacts, f)
 
-#Predicting 
+#Predicting
 def predict(X, w, b):
     probs = sigmoid(np.dot(X, w) + b)
     return (probs >= 0.5)

@@ -19,7 +19,7 @@ I. `train.py`
       - Age Distribution
       - Boxplot of transported vs total spending
       - Graph between cryosleep and transported
-   3. Wrote the code for Logistic Regression (Sigmoid function, iterating and using Gradient Descent, predict function).
+   3. Trained the Logistic Regression model from scratch (Sigmoid function, iterating and using Gradient Descent, predict function).
    4. Made a dictionary artifacts and loaded it to the binary file `model_artifacts.pkl`.
 
 II. `test.py`

@@ -136,13 +136,9 @@ plt.tight_layout()
 plt.show()
 
 # Dropping columns that are not useful 
-df = df.drop(columns=['PassengerId', 
-    'Name',          # not useful for prediction
-    'Cabin'          # already split into Deck, CabinNum, Side
-])
+df = df.drop(columns=['PassengerId','Name', 'Cabin'])
 
 categorical_cols = ['HomePlanet', 'Destination','Deck', 'Side','VIP', 'CryoSleep']
-
 # One-Hot Encoding
 df = pd.get_dummies( df, columns=categorical_cols,  drop_first=True)
 

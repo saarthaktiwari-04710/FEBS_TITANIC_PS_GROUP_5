@@ -116,7 +116,6 @@ plt.boxplot([spend_false, spend_true], labels=["Not Transported", "Transported"]
 plt.xlabel("Transported")
 plt.ylabel("Total Spending")
 plt.title("Total Spending vs Transported")
-
 plt.show()
 
 

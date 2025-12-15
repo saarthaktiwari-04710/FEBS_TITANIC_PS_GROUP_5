@@ -37,7 +37,7 @@ II. `test.py`
         
 **Thanvi Chennupati:-**
 
-I. train.py
+I. `train.py`
 1. Handled missing values in columns:
 
    -Homeplanet
@@ -64,7 +64,7 @@ I. train.py
     Created a variable for Total Spending and summed up all the spendings into that, to make the analysis easy.
   
 
-  2. Plotted graphs of:
+2. Plotted graphs of:
 
    -Homeplanet vs Transported
    
@@ -77,19 +77,20 @@ I. train.py
    -Deck vs Transported
    
 
-   3. Dropped the columns that are not useful for the training of the model.
+3. Dropped the columns that are not useful for the training of the model.
       
-   4. Did the encoding for Homeplanet,Destination,Side,Deck,VIP,Cryosleep using one-hot encoding.
+4. Did the encoding for Homeplanet,Destination,Side,Deck,VIP,Cryosleep using one-hot encoding.
 
-   5. Changed the values of Transported from T/F to 1/0.
+5. Changed the values of Transported from T/F to 1/0.
       
-   6. Did target splitting for the model:
+6. Did target splitting for the model:
      X as features
      y as transported or not
     
-   7. The numerical features Age and TotalSpending were scaled using StandardScaler.
+7. The numerical features Age and TotalSpending were scaled using StandardScaler.
 
-II. test.py
+II.`test.py`
+
  1. Again used the old file to fill missing values in columns:
     Homeplanet
     

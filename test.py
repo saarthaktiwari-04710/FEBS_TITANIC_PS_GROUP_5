@@ -35,7 +35,7 @@ df['TotalSpending'] = df[spending_cols].sum(axis=1)
 passenger_ids = df['PassengerId']
 
 # Dropping columns that are not useful 
-df = df.drop(columns=['PassengerId','Name', 'Cabin'])
+df = df.drop(columns=['PassengerId','Name', 'Cabin','RoomService', 'FoodCourt', 'ShoppingMall', 'Spa', 'VRDeck'])
 
 categorical_cols = ['HomePlanet', 'Destination','Deck', 'Side','VIP', 'CryoSleep']
 # One-Hot Encoding

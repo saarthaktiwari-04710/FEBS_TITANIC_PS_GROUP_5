@@ -4,11 +4,26 @@ import pickle
 import preprocessing_saarthak
 
 df = pd.read_csv("test.csv")
+
 df[['RoomService']]=si_RS.transform(df[['RoomService']])
 df[['FoodCourt']]=si_FC.transform(df[['FoodCourt']])
 df[['Spa']]=si_SPA.transform(df[['Spa']])
 df[['CryoSleep']]=si_CS.transform(df[['CryoSleep']])
 df[['Name']]=si_Name.transform(df[['Name']])
+
+df[['Deck','CabinNum','Side']]=df['Cabin'].str.split('/',expand=True)
+df['GroupId']=df['PassengerId'].str.split('_').str[0]
+df['CabinNum'] = pd.to_numeric(df['CabinNum'], errors='coerce')
+df['Deck'] = df.groupby('GroupId')['Deck'].transform(lambda x: x.fillna(x.mode()[0]) if not x.mode().empty else x))
+deck_mode = df['Deck'].mode()[0]
+df['Deck'] = df['Deck'].fillna(deck_mode)
+cabin_median = df['CabinNum'].median()
+df['CabinNum'] = df['CabinNum'].fillna(cabin_median)
+df['Side'] = df.groupby('GroupId')['Side'].transform(lambda x: x.fillna(x.mode()[0]) if not x.mode().empty else x))
+side_mode = df['Side'].mode()[0]
+df['Side'] = df['Side'].fillna(side_mode)
+df['GroupSize'] = df.groupby('GroupId')['PassengerId'].transform('count')
+
 
 spending_cols = ['RoomService', 'FoodCourt', 'ShoppingMall', 'Spa', 'VRDeck']
 df['TotalSpending'] = df[spending_cols].sum(axis=1)

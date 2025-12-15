@@ -177,13 +177,9 @@ for i in range(epochs):
 
 #saving it to a binary file
 import pickle
-artifacts = {
-        'w': w,
-        'b': b,
-        'columns': df.drop(columns=['Transported']).columns.tolist()
-}
-with open('model_artifacts.pkl', 'wb') as f:
-        pickle.dump(artifacts, f)
+artifacts = { 'w': w, 'b': b, 'columns': X.columns.tolist(),'scaler': scaler}
+
+with open('model_artifacts.pkl', 'wb') as f: pickle.dump(artifacts, f)
 
 #Predicting 
 def predict(X, w, b):

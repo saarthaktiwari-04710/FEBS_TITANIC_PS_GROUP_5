@@ -1,20 +1,13 @@
 import pandas as pd
 import numpy as np
 import pickle
-import train
-import preprocessing_saarthak
-from preprocessing_TC import preprocess
+
+import preprocessing_saarthak import preprocess_saarthak
+from preprocessing_TC import preprocess_TC
 df = pd.read_csv("test.csv")
 
-df = preprocess(df)
-
-
-df[['RoomService']]=preprocessing_saarthak.si_RS.transform(df[['RoomService']])
-df[['FoodCourt']]=preprocessing_saarthak.si_FC.transform(df[['FoodCourt']])
-df[['Spa']]=preprocessing_saarthak.si_SPA.transform(df[['Spa']])
-df[['CryoSleep']]=preprocessing_saarthak.si_CS.transform(df[['CryoSleep']])
-df[['Name']]=preprocessing_saarthak.si_Name.transform(df[['Name']])
-
+df = preprocess_TC(df)
+df = preprocess_saarthak(df)
 
 df[['Deck','CabinNum','Side']]=df['Cabin'].str.split('/',expand=True)
 df['GroupId']=df['PassengerId'].str.split('_').str[0]
@@ -29,7 +22,6 @@ side_mode = df['Side'].mode()[0]
 df['Side'] = df['Side'].fillna(side_mode)
 df['GroupSize'] = df.groupby('GroupId')['PassengerId'].transform('count')
 
-
 spending_cols = ['RoomService', 'FoodCourt', 'ShoppingMall', 'Spa', 'VRDeck']
 df['TotalSpending'] = df[spending_cols].sum(axis=1)
 passenger_ids = df['PassengerId']
@@ -41,17 +33,19 @@ categorical_cols = ['HomePlanet', 'Destination','Deck', 'Side','VIP', 'CryoSleep
 # One-Hot Encoding
 df = pd.get_dummies( df, columns=categorical_cols,  drop_first=True)
 
+df['Transported'] = df['Transported'].astype(int)
 
-X=df
-X[['Age', 'TotalSpending']] = scaler.transform(X[['Age', 'TotalSpending']])
-X=X.values.astype(float)
+X = df.drop('Transported', axis=1)
 
 #loading values of w and b from train.py
-with open('model_artifacts.pkl', 'rb') as f:
-        artifacts = pickle.load(f)
-    
-w = artifacts['w']
-b = artifacts['b']
+with open('model_artifacts.pkl', 'rb') as f:artifacts = pickle.load(f)    
+     w = artifacts['w']
+     b = artifacts['b']
+     scaler = artifacts['scaler']
+
+# Scaling
+X[['Age', 'TotalSpending']] = scaler.transform(X[['Age', 'TotalSpending']])
+X = X.values.astype(float)
 
 #predicting transported
 predictions=predict(X, w, b)

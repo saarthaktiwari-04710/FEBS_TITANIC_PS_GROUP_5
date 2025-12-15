@@ -33,8 +33,8 @@ categorical_cols = ['HomePlanet', 'Destination','Deck', 'Side','VIP', 'CryoSleep
 # One-Hot Encoding
 df = pd.get_dummies( df, columns=categorical_cols,  drop_first=True)
 
-
-X = df
+df['Transported'] = df['Transported'].astype(int)
+X = df.drop('Transported', axis=1)
 
 #loading values of w and b from train.py
 with open('model_artifacts.pkl', 'rb') as f:artifacts = pickle.load(f)    

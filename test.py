@@ -40,14 +40,18 @@ X = df.drop('Transported', axis=1)
 with open('model_artifacts.pkl', 'rb') as f:artifacts = pickle.load(f)    
 w = artifacts['w']
 b = artifacts['b']
+logit_offset = artifacts['logit_offset']
 scaler = artifacts['scaler']
+train_cols = artifacts['columns']
 
 # Scaling
 X[['Age', 'TotalSpending']] = scaler.transform(X[['Age', 'TotalSpending']])
 X = X.values.astype(float)
 
 #predicting transported
-predictions=predict(X, w, b)
+logits = (X @ w + b).flatten() - logit_offset #we use matrix multiplication between X and w
+probs = sigmoid(logits)
+predictions = (probs > 0.5)
 
 #saving values in submission.csv
 submission = pd.DataFrame({'PassengerId': passenger_ids, 'Transported': predictions})

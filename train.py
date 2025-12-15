@@ -154,7 +154,8 @@ y = df['Transported']
 #Total Spending
 from sklearn.preprocessing import StandardScaler
 
-df["TotalSpending"] = StandardScaler().fit_transform(df[["TotalSpending"]])
+scaler=StandardScaler()
+df["TotalSpending"] = scaler.fit_transform(df[["TotalSpending"]])
 
 
 

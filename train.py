@@ -1,12 +1,12 @@
 import pandas as pd
 import numpy as np
-from preprocessing_TC import preprocess
-import preprocessing_saarthak
+from preprocessing_TC import preprocess_TC
+from preprocessing_saarthak import preprocessing_saarthak
 import random
 df = pd.read_csv("train.csv")
 
-df = preprocess(df)
-df = preprocessing_saarthak.preprocess_saarthak(df)
+df = preprocess_TC(df)
+df = preprocessing_saarthak(df)
 
 spending_cols = ['RoomService', 'FoodCourt', 'ShoppingMall', 'Spa', 'VRDeck']
 df['TotalSpending'] = df[spending_cols].sum(axis=1)
@@ -24,6 +24,7 @@ df['CabinNum'] = df['CabinNum'].fillna(cabin_median)
 df['Side'] = df.groupby('GroupId')['Side'].transform(lambda x: x.fillna(x.mode()[0]) if not x.mode().empty else x)
 side_mode = df['Side'].mode()[0]
 df['Side'] = df['Side'].fillna(side_mode)
+
 df['GroupSize'] = df.groupby('GroupId')['PassengerId'].transform('count')
 
 #Transported Count Plot

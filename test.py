@@ -7,7 +7,7 @@ from preprocessing_TC import preprocess
 df = pd.read_csv("test.csv")
 
 df = preprocess(df)
-df = preprocessing_saarthak.preprocess_saarthak(df)
+df = preprocessing_saarthak(df)
 
 df[['Deck','CabinNum','Side']]=df['Cabin'].str.split('/',expand=True)
 df['GroupId']=df['PassengerId'].str.split('_').str[0]

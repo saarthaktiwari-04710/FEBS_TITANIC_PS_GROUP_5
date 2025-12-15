@@ -6,7 +6,7 @@ import random
 df = pd.read_csv("train.csv")
 
 df = preprocess(df)
-df = preprocessing_saarthak.preprocess_saarthak(df)
+df = preprocessing_saarthak(df)
 
 spending_cols = ['RoomService', 'FoodCourt', 'ShoppingMall', 'Spa', 'VRDeck']
 df['TotalSpending'] = df[spending_cols].sum(axis=1)

@@ -175,13 +175,14 @@ learning_rate=0.01
 
 #Traing by iterations
 for i in range(epochs):
-  s=random.randint(0,x1.shape[0]-1)
+  s=random.randint(0,X.shape[0]-1)
   y0=np.dot(x1[s],w)+b
   y_hat=sigmoid(y0)
   error=y1[s]-y_hat
   w=w+learning_rate*error*x1[s]
   b=b+learning_rate*error
-
+train_logits = (x1 @ w + b).flatten()
+logit_offset = np.mean(train_logits)
 #saving it to a binary file
 import pickle
 artifacts = { 'w': w, 'b': b, 'columns': X.columns.tolist(),'scaler': scaler,'logit_offset': logit_offset}

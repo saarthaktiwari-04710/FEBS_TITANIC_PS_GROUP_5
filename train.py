@@ -145,6 +145,13 @@ df = pd.get_dummies( df, columns=categorical_cols,  drop_first=True)
 #  (Transported: True/False → 1/0)
 df['Transported'] = df['Transported'].astype(int)
 
+#Feature Scaling
+
+#Total Spending
+from sklearn.preprocessing import StandardScaler
+
+df["TotalSpending"] = StandardScaler().fit_transform(df[["TotalSpending"]])
+
 
 
 

@@ -3,10 +3,10 @@ import numpy as np
 import pickle
 
 import preprocessing_saarthak import preprocess_saarthak
-from preprocessing_TC import preprocess_TC
+from preprocessing_TC import preprocess
 df = pd.read_csv("test.csv")
 
-df = preprocess_TC(df)
+df = preprocess(df)
 df = preprocess_saarthak(df)
 
 df[['Deck','CabinNum','Side']]=df['Cabin'].str.split('/',expand=True)

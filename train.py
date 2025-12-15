@@ -184,12 +184,8 @@ for i in range(epochs):
 
 #saving it to a binary file
 import pickle
-artifacts = { 'w': w, 'b': b, 'columns': X.columns.tolist(),'scaler': scaler}
+artifacts = { 'w': w, 'b': b, 'columns': X.columns.tolist(),'scaler': scaler,'logit_offset': logit_offset}
 
 with open('model_artifacts.pkl', 'wb') as f: pickle.dump(artifacts, f)
 
-#Predicting
-def predict(X, w, b):
-    probs = sigmoid(np.dot(X, w) + b)
-    return (probs > 0.5)
 

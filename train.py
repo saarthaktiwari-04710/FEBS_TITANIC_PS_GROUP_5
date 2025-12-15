@@ -39,6 +39,7 @@ plt.xticks(rotation=0)
 plt.show()
 
 #Age distribution graph
+
 from scipy.stats import gaussian_kde
 age = df['Age'].dropna()
 plt.figure(figsize=(8, 6))
@@ -51,6 +52,7 @@ plt.tight_layout()
 plt.show()
 
 # Age vs Transported
+
 plt.figure(figsize=(8, 6))
 plt.hist(df[df['Transported'] == True]['Age'],
          bins=40,
@@ -68,6 +70,7 @@ plt.tight_layout()
 plt.show()
 
 # HomePlanet vs Transported
+
 plt.figure(figsize=(6, 4))
 homeplanet_counts = pd.crosstab(df['HomePlanet'], df['Transported'])
 homeplanet_counts.plot(kind='bar')
@@ -78,6 +81,7 @@ plt.tight_layout()
 plt.show()
 
 # Destination vs Transported
+
 plt.figure(figsize=(6, 4))
 destination_counts = pd.crosstab(df['Destination'], df['Transported'])
 destination_counts.plot(kind='bar')
@@ -88,6 +92,7 @@ plt.tight_layout()
 plt.show()
 
 # Deck vs Transported
+
 plt.figure(figsize=(6, 4))
 deck_counts = pd.crosstab(df['Deck'], df['Transported'])
 deck_counts.plot(kind='bar')
@@ -98,6 +103,7 @@ plt.tight_layout()
 plt.show()
 
 # Side vs Transported
+
 plt.figure(figsize=(5, 4))
 side_counts = pd.crosstab(df['Side'], df['Transported'])
 side_counts.plot(kind='bar')
@@ -126,9 +132,22 @@ cryo_plot.plot(kind="bar")
 plt.xlabel("CryoSleep")
 plt.ylabel("Proportion Transported")
 plt.title("CryoSleep vs Transported")
-plt.xticks(rotation=0)
 plt.tight_layout()
 plt.show()
+
+# Dropping columns that are not useful 
+df = df.drop(columns=['PassengerId', 
+    'Name',          # not useful for prediction
+    'Cabin'          # already split into Deck, CabinNum, Side
+])
+
+categorical_cols = ['HomePlanet', 'Destination','Deck', 'Side','VIP', 'CryoSleep']
+
+# One-Hot Encoding
+df = pd.get_dummies( df, columns=categorical_cols,  drop_first=True)
+
+#  (Transported: True/False → 1/0)
+df['Transported'] = df['Transported'].astype(int)
 
 
 

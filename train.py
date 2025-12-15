@@ -118,6 +118,18 @@ plt.ylabel("Total Spending")
 plt.title("Total Spending vs Transported")
 plt.show()
 
+#Graph between cryosleep and transported
+
+cryo_plot = (df.groupby("CryoSleep")["Transported"].apply(lambda x: x.mean()))
+plt.figure(figsize=(5, 4))
+cryo_plot.plot(kind="bar")
+plt.xlabel("CryoSleep")
+plt.ylabel("Proportion Transported")
+plt.title("CryoSleep vs Transported")
+plt.xticks(rotation=0)
+plt.tight_layout()
+plt.show()
+
 
 
 

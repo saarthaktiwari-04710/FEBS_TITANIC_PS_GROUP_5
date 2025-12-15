@@ -163,7 +163,7 @@ def sigmoid(z):
          return a
 
 #defining parameters
-w=np.ones(X.shape[1])
+w=np.ones(X.shape[1])*0.01 # Actually if I make it array of only ones it could really make it worse
 b=0
 epochs=100000
 learning_rate=0.01

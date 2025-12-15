@@ -145,6 +145,10 @@ df = pd.get_dummies( df, columns=categorical_cols,  drop_first=True)
 #  (Transported: True/False → 1/0)
 df['Transported'] = df['Transported'].astype(int)
 
+# Target splitting
+X = df.drop('Transported', axis=1)
+y = df['Transported']
+
 #Feature Scaling
 
 #Total Spending

@@ -146,17 +146,12 @@ df = pd.get_dummies( df, columns=categorical_cols,  drop_first=True)
 df['Transported'] = df['Transported'].astype(int)
 
 # Target splitting
-from sklearn.model_selection import train_test_split
 X = df.drop('Transported', axis=1)
 y = df['Transported']
-
-X_train, X_val, y_train, y_val = train_test_split( X, y, test_size=0.2)
 
 #Feature Scaling
 from sklearn.preprocessing import StandardScaler
 scaler = StandardScaler()
-X_train[['Age', 'TotalSpending']] = scaler.fit_transform(X_train[['Age', 'TotalSpending']])
-X_val[['Age', 'TotalSpending']] = scaler.transform( X_val[['Age', 'TotalSpending']])
-
+X[['Age', 'TotalSpending']] = scaler.fit_transform(X[['Age', 'TotalSpending']])
 
 
